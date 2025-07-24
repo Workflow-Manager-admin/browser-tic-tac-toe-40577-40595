@@ -1,0 +1,210 @@
+/* THEME COLOR VARIABLES */
+:root {
+  --primary: #1976D2;
+  --secondary: #424242;
+  --accent: #FBC02D;
+  --bg-light: #ffffff;
+  --bg-board: #fafafc;
+  --border: #E0E0E0;
+  --text-main: #222426;
+  --square-hover: #eeeaf6;
+  --square-x: #1976D2;
+  --square-o: #FBC02D;
+  --box-shadow: 0 2px 18px rgba(25, 118, 210, 0.07);
+}
+
+/* Main container */
+.App {
+  background: var(--bg-light);
+  min-height: 100vh;
+  color: var(--text-main);
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", Arial, sans-serif;
+}
+
+/* Tic Tac Toe Game Layout */
+.ttt-game-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 8px;
+}
+
+/* Title */
+.ttt-title {
+  font-size: 2.3rem;
+  color: var(--primary);
+  margin-bottom: 18px; 
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.ttt-status {
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  color: var(--secondary);
+  min-height: 2em;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.26s;
+}
+.ttt-status-accent {
+  color: var(--accent);
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(251,192,45,.04);
+}
+
+/* Fade-in animation for status (move feedback) */
+.fade-in {
+  animation: fadein 0.30s;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: scale(1.06);}
+  to   { opacity: 1; transform: scale(1);}
+}
+
+.ttt-board {
+  background: var(--bg-board);
+  border-radius: 18px;
+  margin: 0 auto 22px;
+  display: inline-block;
+  box-shadow: var(--box-shadow);
+  padding: 14px 12px 10px 12px;
+  transition: box-shadow 0.2s;
+}
+
+.board-finished {
+  filter: grayscale(12%) brightness(0.98) blur(0px);
+  opacity: 0.93;
+}
+
+/* Each row of board */
+.ttt-board-row {
+  display: flex;
+}
+
+/* Square styling */
+.ttt-square {
+  width: 70px;
+  height: 70px;
+  background: #FFF;
+  border: 2.5px solid var(--border);
+  border-radius: 10px;
+  margin: 0.5vw;
+  margin-bottom: 0;
+  font-size: 2.5rem;
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 6px rgba(66,66,66, 0.04);
+  transition: 
+    border-color 0.16s, 
+    box-shadow 0.15s,
+    background 0.21s;
+  user-select: none;
+  position: relative;
+}
+.ttt-square:last-child {
+  margin-right: 0;
+}
+.ttt-square:focus,
+.ttt-square:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--square-hover);
+  z-index: 1;
+}
+.ttt-square:active {
+  background: #ececec;
+  border-color: var(--primary);
+}
+
+/* X/O symbol styling */
+.ttt-symbol {
+  display: inline-block;
+  transition: color 0.15s, transform 0.15s cubic-bezier(.5,1.8,.4,1.1);
+  transform: scale(1.15);
+}
+.ttt-symbol-X {
+  color: var(--square-x);
+  text-shadow: 0 1px 5px #d0e8fd44;
+  font-size: 2.9rem;
+}
+.ttt-symbol-O {
+  color: var(--square-o);
+  text-shadow: 0 1px 6px #f6de9444;
+  font-size: 2.9rem;
+}
+
+/* Animate winning squares */
+.ttt-square.highlight {
+  border-color: var(--accent);
+  background: #fff9e0;
+  box-shadow: 0 0 10px 0 var(--accent), 0 4px 16px 0 #fbc02d55;
+  z-index: 2;
+  animation: highlight-sq 0.32s;
+}
+@keyframes highlight-sq {
+  from { box-shadow: 0 0 0 0 var(--accent);}
+  to   { box-shadow: 0 0 10px 0 var(--accent), 0 4px 16px 0 #FBC02D55;}
+}
+
+/* Reset/New Game Button */
+.ttt-reset-btn {
+  margin-top: 14px;
+  appearance: none;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 1.17rem;
+  font-weight: 600;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.09);
+  cursor: pointer;
+  padding: 0.7em 2.1em;
+  letter-spacing: 0.6px;
+  transition: background 0.16s, box-shadow 0.18s;
+}
+.ttt-reset-btn:hover {
+  background: var(--accent);
+  color: var(--secondary);
+  box-shadow: 0 4px 16px rgba(251,192,45, 0.16);
+}
+.ttt-reset-btn:active {
+  background: #ECC34A;
+}
+/* Footer mini branding */
+.ttt-footer {
+  margin-top: 36px;
+  text-align: center;
+  font-size: 1rem;
+  color: var(--secondary);
+  opacity: 0.68;
+}
+.footer-credit a {
+  color: var(--primary);
+  text-decoration: underline dotted;
+  opacity: 0.82;
+  transition: color 0.16s;
+}
+.footer-credit a:hover {
+  color: var(--accent);
+}
+
+/* Responsive for mobile phones */
+@media (max-width: 768px) {
+  .ttt-title { font-size: 1.6rem;}
+  .ttt-status { font-size: 1rem; }
+  .ttt-board { padding: 7px 3px 7px 3px; }
+  .ttt-square { width: 20vw; height: 20vw; min-width: 50px; min-height: 50px; font-size: 1.5rem;}
+  .ttt-reset-btn { font-size: 1rem; padding: 0.5em 1.4em;}
+}
+
+/* Extra small devices */
+@media (max-width: 412px) {
+  .ttt-title { font-size: 1.05rem;}
+}
